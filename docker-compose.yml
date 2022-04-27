@@ -43,6 +43,17 @@ services:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     networks:
       - application
+  redis:
+    image: "redis:bullseye"
+    container_name: ${APP_NAME}_redis
+    command: redis-server
+    ports:
+      - 6379:6397
+    volumes:
+      - ./docker/redis/data:/data
+      - ./docker/redis/conf:/usr/local/etc/redis/redis.conf
+    networks:
+      - application
   phpmyadmin:
     image: phpmyadmin:latest
     container_name: ${APP_NAME}_phpmyadmin
